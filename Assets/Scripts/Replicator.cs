@@ -1,25 +1,26 @@
-using System.Collections.Generic;
 using UnityEngine;
 using static Utils;
 
-public class CubeDivider : MonoBehaviour
+public class Replicator : MonoBehaviour
 {
-    [SerializeField] private MinMaxPair _amountOfDescendants = new MinMaxPair(2,2);
-    [Range(0f, 1f)] public float _ratioOfReplicate = 1.0f;
+    [SerializeField] private MinMaxPair _amountOfDescendants = new MinMaxPair(2,6);
+    [SerializeField, Range(0f, 1f)] private float _ratioOfReplicate = 1.0f;
     [SerializeField] private float _chanceDecayingRate = 2f;
     [SerializeField, Range(0f, 1f)] private float _scaleOfChild = 0.5f;    
 
-    [SerializeField] private GameObject spawnedObject;
-
-    [SerializeField] private float _explosionForce;
+    [SerializeField] private Replicant _spawnedObject;
+    [SerializeField] private ExplosionZone _explosionZone;
 
     private void OnDestroy()
     {
-        Explode();        
+        Replicate();
+        
+        ExplosionZone explosion = Instantiate(_explosionZone, this.transform.position, Quaternion.identity);
+        explosion.SetExplosionParameters(1/this.transform.localScale.magnitude, 1/this.transform.localScale.magnitude);
     }
 
 
-    private void Explode()
+    private void Replicate()
     {
         if (IsProcessed(_ratioOfReplicate))
         {
@@ -29,26 +30,21 @@ public class CubeDivider : MonoBehaviour
 
             for (int i = 0; i < descendantsNumber; i++)
             {
-                GameObject child = Instantiate(spawnedObject, offset + this.transform.position, Quaternion.identity);
+                GameObject child = Instantiate(_spawnedObject.gameObject, offset + this.transform.position, Quaternion.identity);
                 SetChildParameters(child);
                 child.SetActive(true);
-
-                child.GetComponent<Rigidbody>().AddForce(offset * _explosionForce);
             }
         }
-
-
     }
 
     private void SetChildParameters(GameObject child)
     {
         child.GetComponent<Renderer>().material.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-        CubeDivider parametersToSet = child.GetComponent<CubeDivider>(); 
+        Replicator parametersToSet = child.GetComponent<Replicator>(); 
         parametersToSet._amountOfDescendants = _amountOfDescendants;
         child.transform.localScale *= _scaleOfChild;
         parametersToSet._ratioOfReplicate = _ratioOfReplicate / _chanceDecayingRate; ;
         parametersToSet._chanceDecayingRate = _chanceDecayingRate;
-        parametersToSet._explosionForce = _explosionForce;
     }
 
     private Vector3 GetRandomOffset()
