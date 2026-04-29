@@ -1,45 +1,56 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Camerarotation : MonoBehaviour
+public class CameraControl : MonoBehaviour
 {
 
     [SerializeField] private float _rotationSpeed;
     [SerializeField] private float _zoomSpeed;
-    private float X, Y, Z;
-    private float eulerX = 0, eulerY = 0;
 
-    void Start()
+    [SerializeField] private KeyCode _zoomKey = KeyCode.Q;
+    [SerializeField] private KeyCode _unzoomKey = KeyCode.E;
+    [SerializeField] private KeyCode _resteKey = KeyCode.R;
+
+    private float _mouseXMovement;
+    private float _mouseYMovement;
+    private float _eulerX = 0;
+    private float _eulerY = 0;
+    private int angleLimiter = 360;
+
+    private float _horizontalRotation => Input.GetAxis("Mouse X");
+    private float _verticalRotation => -Input.GetAxis("Mouse Y");
+
+    private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     
-    void Update()
+    private void Update()
     {
-        X = Input.GetAxis("Mouse X") * _rotationSpeed * Time.deltaTime;
-        Y = -Input.GetAxis("Mouse Y") * _rotationSpeed * Time.deltaTime;
-        eulerX = (transform.rotation.eulerAngles.x + Y) % 360;
-        eulerY = (transform.rotation.eulerAngles.y + X) % 360;
-        transform.rotation = Quaternion.Euler(eulerX, eulerY, 0);
+        _mouseXMovement = _horizontalRotation * _rotationSpeed * Time.deltaTime;
+        _mouseYMovement = _verticalRotation  * _rotationSpeed * Time.deltaTime;
+
+        _eulerX = (transform.rotation.eulerAngles.x + _mouseYMovement) % angleLimiter;
+        _eulerY = (transform.rotation.eulerAngles.y + _mouseXMovement) % angleLimiter;
+
+        transform.rotation = Quaternion.Euler(_eulerX, _eulerY, 0);
 
         if (Input.GetKeyUp(KeyCode.Escape))
         {
             Cursor.lockState = CursorLockMode.None;
         }
 
-        if(Input.GetKey(KeyCode.Q))
+        if(Input.GetKey(_zoomKey))
         {
             transform.Translate(Vector3.forward * _zoomSpeed * Time.deltaTime);
         }
 
-        if(Input.GetKey(KeyCode.E))
+        if(Input.GetKey(_unzoomKey))
         {
             transform.Translate(Vector3.back * _zoomSpeed * Time.deltaTime);
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(_resteKey))
         {
             transform.localPosition = Vector3.zero;
         }

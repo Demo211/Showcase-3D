@@ -12,11 +12,10 @@ GameObject:
   - component: {fileID: 2020547758383187932}
   - component: {fileID: 6970168862478296358}
   - component: {fileID: 8011664010590655846}
-  - component: {fileID: 7752676909020903955}
-  - component: {fileID: 5946589465517201935}
   - component: {fileID: 2174071627362106260}
+  - component: {fileID: 4129818806671624182}
   m_Layer: 0
-  m_Name: Replicant
+  m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -108,38 +107,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7752676909020903955
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5343787733506657715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fb53b92f632ffd49b93ac78b8990da4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5946589465517201935
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5343787733506657715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e459faf5cfc7ae4495159c63292770d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _amountOfDescendants:
-    Min: 2
-    Max: 6
-  _ratioOfReplicate: 1
-  _chanceDecayingRate: 2
-  _scaleOfChild: 0.5
-  _spawnedObject: {fileID: 7752676909020903955}
-  _explosionZone: {fileID: 6352580315236668056, guid: 5c4ca1f5cf9fdf94aaa0d88cd4f9c543, type: 3}
 --- !u!54 &2174071627362106260
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -167,3 +134,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!114 &4129818806671624182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5343787733506657715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fb53b92f632ffd49b93ac78b8990da4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ratioOfReplicate: 0
+  _chanceOfReplicate: 1

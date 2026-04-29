@@ -25,7 +25,7 @@ public static class Utils
     {
         int normalizer = 2;
         float offsetter = -0.5f;
-        return (float)s_random.NextDouble() * normalizer + offsetter;
+        return (float)(s_random.NextDouble()  + offsetter)* normalizer;
     }
 
     public static bool IsProcessed(float ratio)
