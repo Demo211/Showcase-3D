@@ -7,11 +7,15 @@ public class Exploder : MonoBehaviour
     [SerializeField] private Interactor _interactor;
 
     [SerializeField] private float _explosionTime;
-    [SerializeField] private float _explosionForce;
-    [SerializeField] private float _explosionRadius;
+    [SerializeField] private float _baseExplosionForce;
+    [SerializeField] private float _baseExplosionRadius;
 
     private Cube _destroyedCube;
     private Vector3 _explosionCenter;
+
+
+    private float _explosionForce;
+    private float _explosionRadius;
 
     private void OnEnable()
     {
@@ -62,7 +66,7 @@ public class Exploder : MonoBehaviour
                 offset = obj.transform.position - _explosionCenter;
 
                 distanceToObjectFromExplosionCenter = offset.magnitude;
-                rangeBasedForceRatio = Mathf.Max((_explosionRadius - distanceToObjectFromExplosionCenter)/_explosionRadius, minForceRatio);
+                rangeBasedForceRatio = Max((_explosionRadius - distanceToObjectFromExplosionCenter)/_explosionRadius, minForceRatio);
                 explosionForce = _explosionForce * rangeBasedForceRatio;
 
                 rigidbody.AddForce(offset * explosionForce);
@@ -74,8 +78,8 @@ public class Exploder : MonoBehaviour
     {
         float modifier = _destroyedCube.transform.localScale.magnitude;
 
-        _explosionForce /= modifier;
-        _explosionRadius /= modifier;
+        _explosionForce = _baseExplosionForce/ modifier;
+        _explosionRadius = _baseExplosionRadius/ modifier;
     }
 }
 
