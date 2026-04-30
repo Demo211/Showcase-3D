@@ -274,8 +274,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _interactor: {fileID: 963194229}
   _explosionTime: 1
-  _explosionForce: 30
-  _explosionRadius: 5
+  _baseExplosionForce: 50
+  _baseExplosionRadius: 5
 --- !u!1001 &525810163
 PrefabInstance:
   m_ObjectHideFlags: 0
