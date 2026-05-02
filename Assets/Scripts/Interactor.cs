@@ -12,8 +12,7 @@ public class Interactor : MonoBehaviour
 
     [NonSerialized] public Cube InteractedObject;
 
-    public event UnityAction SpawningCube;
-    public event UnityAction ExplodingCube;
+    public event UnityAction InteractingWithCube;
 
 
     private void Update()
@@ -30,8 +29,7 @@ public class Interactor : MonoBehaviour
             if (Input.GetKeyDown(_interactionKey))
             {
                 _hitInfo.transform.TryGetComponent<Cube>(out InteractedObject);
-                SpawningCube?.Invoke();
-                ExplodingCube?.Invoke();
+                InteractingWithCube?.Invoke();
             }
         }
     }

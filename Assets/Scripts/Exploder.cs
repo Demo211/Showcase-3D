@@ -4,35 +4,17 @@ using UnityEngine;
 
 public class Exploder : MonoBehaviour
 {
-    [SerializeField] private Interactor _interactor;
-
     [SerializeField] private float _explosionTime;
     [SerializeField] private float _baseExplosionForce;
     [SerializeField] private float _baseExplosionRadius;
 
-    private Cube _destroyedCube;
-    private Vector3 _explosionCenter;
-
-
+    private Vector3 _explosionPosition;
     private float _explosionForce;
     private float _explosionRadius;
 
-    private void OnEnable()
+    public void ExplodeAt(Vector3 explosionCenter)
     {
-        _interactor.ExplodingCube += Explode;
-    }
-
-    private void OnDisable()
-    {
-        _interactor.ExplodingCube -= Explode;
-    }
-
-    private void Explode()
-    {
-        _destroyedCube = _interactor.InteractedObject;
-        _explosionCenter = _destroyedCube.transform.position;
-        SetExplosionParameters();
-        Destroy(_destroyedCube);
+        _explosionPosition = explosionCenter;
 
         StartCoroutine(DoExplosion(_explosionTime));
     }
@@ -46,7 +28,7 @@ public class Exploder : MonoBehaviour
 
     private Collider[] GetObjectsIRange()
     {
-        return Physics.OverlapSphere(_explosionCenter, _explosionRadius);
+        return Physics.OverlapSphere(_explosionPosition, _explosionRadius);
     }
 
     private void ApplyForce(Collider[] objects)
@@ -63,7 +45,7 @@ public class Exploder : MonoBehaviour
         {
             if (obj.TryGetComponent<Rigidbody>(out Rigidbody rigidbody))
             {
-                offset = obj.transform.position - _explosionCenter;
+                offset = obj.transform.position - _explosionPosition;
 
                 distanceToObjectFromExplosionCenter = offset.magnitude;
                 rangeBasedForceRatio = Max((_explosionRadius - distanceToObjectFromExplosionCenter)/_explosionRadius, minForceRatio);
@@ -74,10 +56,8 @@ public class Exploder : MonoBehaviour
         }
     }
 
-    public void SetExplosionParameters()
+    public void SetExplosionParameters(float modifier)
     {
-        float modifier = _destroyedCube.transform.localScale.magnitude;
-
         _explosionForce = _baseExplosionForce/ modifier;
         _explosionRadius = _baseExplosionRadius/ modifier;
     }

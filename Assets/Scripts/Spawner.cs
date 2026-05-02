@@ -11,37 +11,21 @@ public class Spawner : MonoBehaviour
 
     [SerializeField] private Cube _spawnedObject;
 
-    private Vector3 _spawnPosition;
-    private Cube _parentCube;
-
-    private void OnEnable()
+    public void Spawn(Vector3 spawnPosition, Cube progenitor)
     {
-        _interactor.SpawningCube += Spawn;
-    }
-
-    private void OnDisable()
-    {
-        _interactor.SpawningCube -= Spawn;
-    }
-
-    public void Spawn()
-    {
-        _parentCube = _interactor.InteractedObject;
-        _spawnPosition = _parentCube.transform.position;
-
-        if (IsProcessed(_parentCube.ChanceToReplicate))
+        if (IsProcessed(progenitor.ChanceToReplicate))
         {
             int descendantsNumber = GetRandomNumber(_amountOfDescendants.Min, _amountOfDescendants.Max);
 
             for (int i = 0; i < descendantsNumber; i++)
             {
-                Cube child = Instantiate(_spawnedObject, GetRandomOffset() + _spawnPosition, Quaternion.identity);
-                child.SetParameters(_parentCube, _chanceDecayingRate, _scaleOfChild);
+                Cube child = Instantiate(_spawnedObject, GetRandomOffset() + spawnPosition, Quaternion.identity);
+                child.SetParameters(progenitor, _chanceDecayingRate, _scaleOfChild);
                 child.gameObject.SetActive(true);
             }
         }
 
-        Destroy(_parentCube.gameObject);
+        Destroy(progenitor.gameObject);
     }
 
     private Vector3 GetRandomOffset()
