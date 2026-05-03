@@ -26,9 +26,9 @@ public class CubeSplitter : MonoBehaviour
         _interactor.InteractingWithCube -= SplitCube;
     }
 
-    private void SplitCube()
+    private void SplitCube(Cube target)
     {
-        _targetCube = _interactor.InteractedObject;
+        _targetCube = target;
         _targetCubeLocation = _targetCube.transform.position;
 
         SpawnChilds();
@@ -61,6 +61,5 @@ public class CubeSplitter : MonoBehaviour
 
         _exploder.ExplodeAt(_targetCubeLocation, explosionForce, explosionRadius);
     }
-
 }
 

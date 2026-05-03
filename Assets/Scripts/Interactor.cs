@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,10 +8,7 @@ public class Interactor : MonoBehaviour
     private Ray _ray;
     private float _rayLength = 100f;
 
-    [NonSerialized] public Cube InteractedObject;
-
-    public event UnityAction InteractingWithCube;
-
+    public event UnityAction<Cube> InteractingWithCube;
 
     private void Update()
     {
@@ -27,10 +23,9 @@ public class Interactor : MonoBehaviour
 
             if (Input.GetKeyDown(_interactionKey))
             {
-                hitInfo.transform.TryGetComponent<Cube>(out InteractedObject);
-                InteractingWithCube?.Invoke();
+                hitInfo.transform.TryGetComponent<Cube>(out Cube InteractedObject);
+                InteractingWithCube?.Invoke(InteractedObject);
             }
         }
     }
-
 }
