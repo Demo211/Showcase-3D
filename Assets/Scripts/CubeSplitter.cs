@@ -40,10 +40,10 @@ public class CubeSplitter : MonoBehaviour
 
     private void SpawnChilds()
     {
-        Vector3 antiFloorClipProtection = new Vector3(0, _targetCube.transform.localScale.y / 2, 0);
 
         if (IsProcessed(_targetCube.ChanceToReplicate))
         {
+            Vector3 antiFloorClipProtection = new Vector3(0, _targetCube.transform.localScale.y / 2, 0);
             int childsAmount = GetRandomNumber(_amountOfDescendants.Min, _amountOfDescendants.Max);
 
             for (int i = 0; i < childsAmount; i++)
