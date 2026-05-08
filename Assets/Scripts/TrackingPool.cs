@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class TrackingPool<T> where T : MonoBehaviour 
+public class TrackingPool<T> where T : Spawnable 
 {
     private T _prefab;
     private List<T> _objects;

@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class PoolTracker : MonoBehaviour
 {
-    private readonly Dictionary<string, TrackingPool<MonoBehaviour>> _pools = new Dictionary<string, TrackingPool<MonoBehaviour>>();
+    private readonly Dictionary<string, TrackingPool<Spawnable>> _pools = new Dictionary<string, TrackingPool<Spawnable>>();
 
     private void Awake()
     {
     }
 
-    public TrackingPool<MonoBehaviour> GetPoolOfType(MonoBehaviour type)
+    public TrackingPool<Spawnable> GetPoolOfType(Spawnable type)
     {
         string key = type.GetType().ToString();
-        TrackingPool<MonoBehaviour> pool;
+        TrackingPool<Spawnable> pool;
 
         if(!_pools.ContainsKey(key))
         { 
-            pool = new TrackingPool<MonoBehaviour>(type);
+            pool = new TrackingPool<Spawnable>(type);
             _pools.Add(key, pool);            
         }
         else
@@ -25,7 +25,6 @@ public class PoolTracker : MonoBehaviour
             pool = _pools[key];
         }
 
-        Debug.Log(key);
         return pool;
     }
 }

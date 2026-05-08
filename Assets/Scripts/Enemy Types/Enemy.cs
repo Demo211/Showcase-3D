@@ -1,19 +1,18 @@
 using System.Collections;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Spawnable
 {
     [SerializeField] private float _lifetime = 5f;
 
     private void OnEnable()
     {
-        StartCoroutine(LifetimeSountdown());
+        StartCoroutine(LifetimeCountdown());
     }
 
-    private IEnumerator LifetimeSountdown()
+    private IEnumerator LifetimeCountdown()
     {
         yield return new WaitForSeconds(_lifetime);
         gameObject.SetActive(false);
     }
-
 }

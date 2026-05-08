@@ -9,15 +9,14 @@ public class SpawnPoint : MonoBehaviour
 
     [SerializeField] private float _timeBetweenSpawns;
 
-    [SerializeField] private Enemy _prefab;
+    [SerializeField] private Spawnable _prefab;
     [SerializeField] private PoolTracker _poolTracker;
 
-    private TrackingPool<MonoBehaviour> _pool;
+    private TrackingPool<Spawnable> _pool;
     private Enemy _spawnedPrefab;
 
     private void Awake()
     {
-        Debug.Log(this.name + "fetching pool with tag:");
         _pool = _poolTracker.GetPoolOfType(_prefab);
     }
 
