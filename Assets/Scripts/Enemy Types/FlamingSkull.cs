@@ -1,0 +1,2 @@
+public class FlamingSkull : Enemy
+{ }

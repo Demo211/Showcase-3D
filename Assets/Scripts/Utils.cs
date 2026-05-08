@@ -1,42 +1,21 @@
-using System;
-
-[Serializable]
-public class MinMaxPair
-{
-    public MinMaxPair(int min, int max)
-    {
-        Min = min;
-        Max = max;
-    }
-
-    public int Min;
-    public int Max;
-}
+﻿using System;
 
 public static class Utils
 {
     private static Random s_random = new Random();
-    public static int GetRandomNumber(int min, int max)
+
+    public static float GetRandomFloatInRange(float min, float max)
     {
-        return s_random.Next(min, max+1);
+        float range = max - min;
+
+        return (float)s_random.NextDouble() * range + min;
     }
 
-    public static float GetRandomValue()
+    public static float GetRandomFloat()
     {
-        int normalizer = 2;
-        float offsetter = -0.5f;
-        return (float)(s_random.NextDouble()  + offsetter)* normalizer;
-    }
+        float offset = 0.5f;
+        float normalizer = 2f;
 
-    public static bool IsProcessed(float ratio)
-    {
-        if(ratio > 1f)
-        {
-            throw new ArgumentException("Ratio can not be greatet than 1", nameof(ratio));
-        }
-        else
-        {
-            return s_random.NextDouble() <= ratio;
-        }
+        return (float)(s_random.NextDouble() - offset)*normalizer;
     }
 }
