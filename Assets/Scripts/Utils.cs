@@ -1,8 +1,13 @@
-﻿using System;
+﻿
+using JetBrains.Annotations;
+using System;
+using System.Runtime.InteropServices.WindowsRuntime;
+using UnityEngine;
+
 
 public static class Utils
 {
-    private static Random s_random = new Random();
+    private static System.Random s_random = new System.Random();
 
     public static float GetRandomFloatInRange(float min, float max)
     {
@@ -17,5 +22,10 @@ public static class Utils
         float normalizer = 2f;
 
         return (float)(s_random.NextDouble() - offset)*normalizer;
+    }
+
+    public static Vector3 GetRandomVectorFlatY()
+    {
+        return new Vector3(GetRandomFloat(),0, GetRandomFloat());
     }
 }
