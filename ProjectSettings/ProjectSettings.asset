@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 26
-  productGUID: 44efadbe7f955904a92dd78f87dcfef3
+  productGUID: 5ad73b9d1194b434aa4d6087be6cf186
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: Showcase 3D
+  productName: quick test
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -774,14 +774,14 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: Showcase 3D
+  metroPackageName: quick test
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: Showcase 3D
+  metroApplicationDescription: quick test
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -851,10 +851,10 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: b7a97220-7b63-429a-af14-3fbeff095839
+  cloudProjectId: 6f5a8728-b924-4033-ba81-4cc169a98977
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Showcase 3D
+  projectName: quick test
   organizationId: demo_211
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
