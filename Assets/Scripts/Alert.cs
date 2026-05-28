@@ -4,8 +4,6 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class Alert : MonoBehaviour
 {
-    [SerializeField] private AlertTrigger[] _alertTriggers;
-
     [SerializeField] private float _maxVolume;
     [SerializeField] private float _volumeChangeStep;
 
@@ -17,36 +15,21 @@ public class Alert : MonoBehaviour
 
     private void Awake()
     {
-        _audioSource = gameObject.GetComponent<AudioSource>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void OnEnable()
     {
-        foreach (AlertTrigger trigger in _alertTriggers)
-        {
-            trigger.ThiefCame += TurnOnAlert;
-            trigger.ThiefLeft += TurnOffAlert;
-        }
-
         StartCoroutine(ChangeVolume());
     }
 
-    private void OnDisable()
-    {
-        foreach (AlertTrigger trigger in _alertTriggers)
-        {
-            trigger.ThiefCame -= TurnOnAlert;
-            trigger.ThiefLeft -= TurnOffAlert;
-        }
-    }
-
-    private void TurnOnAlert()
+    public void TurnOnAlert()
     {
         _audioSource.enabled = true;
         _targetVolume = _maxVolume;
     }
 
-    private void TurnOffAlert()
+    public void TurnOffAlert()
     {
         _targetVolume = 0;
 

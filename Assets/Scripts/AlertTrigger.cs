@@ -1,11 +1,11 @@
 using UnityEngine;
-using UnityEngine.Events;
+using System;
 
 [RequireComponent(typeof(Collider))]
 public class AlertTrigger : MonoBehaviour
 {
-    public event UnityAction ThiefCame;
-    public event UnityAction ThiefLeft;
+    public event Action ThiefCame;
+    public event Action ThiefLeft;
 
     private void OnTriggerEnter(Collider other)
     {
